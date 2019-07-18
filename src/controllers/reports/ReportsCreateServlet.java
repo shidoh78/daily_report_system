@@ -64,7 +64,7 @@ public class ReportsCreateServlet extends HttpServlet {
                 em.close();
 
                 request.setAttribute("_token", request.getSession().getId());
-                request.setAttribute("request", r);
+                request.setAttribute("report", r);
                 request.setAttribute("errors", errors);
 
                 RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/new.jsp");

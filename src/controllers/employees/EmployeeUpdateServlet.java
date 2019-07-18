@@ -71,7 +71,7 @@ public class EmployeeUpdateServlet extends HttpServlet {
             if(errors.size() > 0){
                 em.close();
 
-                request.setAttribute("token", request.getSession().getId());
+                request.setAttribute("_token", request.getSession().getId());
                 request.setAttribute("employee", e);
                 request.setAttribute("errors", errors);
 

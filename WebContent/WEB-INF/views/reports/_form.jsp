@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:if test="${errors != null }">
     <div id="flush_error">
         入力内容にエラーがあります。<br/>
@@ -22,7 +23,22 @@
 <br/><br/>
 
 <label for="content">内容</label><br/>
-<textarea name="content" rows="10" cols="50">${report.content }</textarea>
+<c:choose>
+    <c:when test="${not fn:endsWith(pageContext.request.requestURI, '/new.jsp')}">
+        <textarea name="content" rows="10" cols="50">${report.content }</textarea>
+    </c:when>
+    <c:otherwise>
+        <textarea name="content" rows="10" cols="50">▼業務内容
+どんな業務を、どのくらいの時間で、どれだけ実践したか
+
+▼所感
+重要な連絡、気づいたこと、必要な対応策など
+
+▼特記事項
+相談や不安がある場合
+</textarea>
+    </c:otherwise>
+</c:choose>
 <br/><br/>
 
 <input type="hidden" name="_token" value="${_token }"/>

@@ -8,8 +8,8 @@
         </c:forEach>
     </div>
 </c:if>
-<label for="code">社員番号</label><br/>
-<input type="text" name="code" value="${employee.code }"/>
+<label for="code">社員番号（半角英数）</label><br/>
+<input type="text" name="code" value="${employee.code }" pattern="^[0-9A-Za-z]+$"/>
 <br/><br/>
 
 <label for="name">氏名</label><br/>

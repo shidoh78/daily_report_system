@@ -1,6 +1,7 @@
 package controllers.reports;
 
 import java.io.IOException;
+import java.sql.Date;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import models.Report;
+import models.Response;
 import utils.DBUtil;
 
 /**
@@ -35,6 +37,10 @@ public class ReportShowServlet extends HttpServlet {
         EntityManager em = DBUtil.createEntityManager();
 
         Report r = em.find(Report.class, Integer.parseInt(request.getParameter("id")));
+
+        Response rs = new Response();
+        rs.setResponse_date(new Date(System.currentTimeMillis()));
+        request.setAttribute("response", rs);
 
         em.close();
 

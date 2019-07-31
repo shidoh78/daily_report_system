@@ -6,6 +6,12 @@
         <c:choose>
             <c:when test="${report != null}">
                 <h2>日報　詳細ページ</h2>
+                <p>
+                    <a href="<c:url value='/reports/index'/>">一覧に戻る</a>&nbsp;
+                    <c:if test="${sessionScope.login_employee.id == report.employee.id }">
+                        <a href="<c:url value='/reports/edit?id=${report.id }'/>">この日報を編集する</a>
+                    </c:if>
+                </p>
                 <table>
                     <tbody>
                         <tr>
@@ -36,16 +42,16 @@
                         </tr>
                     </tbody>
                 </table>
+                <br/>
 
-                <c:if test="${sessionScope.login_employee.id == report.employee.id }">
-                    <p><a href="<c:url value='/reports/edit?id=${report.id }'/>">この日報を編集する</a></p>
-                </c:if>
+                <form method="POST" action="<c:url value='/responses/create'/>">
+                    <c:import url="../responses/_form.jsp"/>
+                </form>
+
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>
             </c:otherwise>
         </c:choose>
-
-        <p><a href="<c:url value='/reports/index'/>">一覧に戻る</a></p>
     </c:param>
 </c:import>

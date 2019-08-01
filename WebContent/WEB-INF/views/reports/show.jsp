@@ -44,10 +44,46 @@
                 </table>
                 <br/>
 
+                <table id="response_list">
+                    <tbody>
+                        <tr>
+                            <th rowspan="2">返信 ${responses_count } 件</th>
+                        </tr>
+                        <c:forEach var="response" items="${responses }" varStatus="status">
+                            <tr>
+                                <th>氏名</th>
+                                <td><c:out value="${response.employee.name }"/></td>
+                            </tr>
+                            <tr>
+                                <th>日付</th>
+                                <td><fmt:formatDate value='${response.report_date }' pattern='yyyy-MM-dd' /></td>
+                            </tr>
+                            <tr>
+                                <th>登録日時</th>
+                                <td>
+                                    <fmt:formatDate value="${response.created_at }" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>更新日時</th>
+                                <td>
+                                    <fmt:formatDate value="${response.updated_at }" pattern="yyyy-MM-dd HH:mm:ss"/>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>内容</th>
+                                <td>
+                                    <pre><c:out value="${response.content }"/></pre>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                    </tbody>
+                </table>
+                <br/>
+
                 <form method="POST" action="<c:url value='/responses/create'/>">
                     <c:import url="../responses/_form.jsp"/>
                 </form>
-
             </c:when>
             <c:otherwise>
                 <h2>お探しのデータは見つかりませんでした。</h2>

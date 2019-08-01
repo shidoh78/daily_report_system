@@ -2,6 +2,7 @@ package controllers.reports;
 
 import java.io.IOException;
 import java.sql.Date;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.servlet.RequestDispatcher;
@@ -40,12 +41,20 @@ public class ReportShowServlet extends HttpServlet {
 
         Response rs = new Response();
         rs.setResponse_date(new Date(System.currentTimeMillis()));
-        request.setAttribute("response", rs);
+
+        List<Response> responses = em.createNamedQuery("getAllResponse",Response.class)
+                .getResultList();
+
+        long responses_count = (long)em.createNamedQuery("getResponseCount",Long.class)
+                .getSingleResult();
 
         em.close();
 
         request.setAttribute("report", r);
         request.setAttribute("_token", request.getSession().getId());
+        request.setAttribute("response", rs);
+        request.setAttribute("responses", responses);
+        request.setAttribute("responses_count", responses_count);
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/reports/show.jsp");
         rd.forward(request, response);

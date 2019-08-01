@@ -34,6 +34,10 @@ public class Response {
     private Integer id;
 
     @ManyToOne
+    @JoinColumn(name = "employee_id", nullable = false)
+    private Employee employee;
+
+    @ManyToOne
     @JoinColumn(name = "report_id", nullable = false)
     private Report report;
 
@@ -107,5 +111,13 @@ public class Response {
 
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 }
